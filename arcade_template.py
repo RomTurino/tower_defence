@@ -301,7 +301,7 @@ class MyGame(arcade.Window):
         self.wave_spawn = time.time()
 
         # переменные для управления игрой
-        self.wave = 5
+        self.wave = 1
         self.monster_counter = 0
         self.fails = 0
         self.money = 100
@@ -374,8 +374,8 @@ class MyGame(arcade.Window):
 
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
 
-        if y > CELL_HEIGHT * (COLUMN_COUNT - 2): #мышь находится сверху
-            if x < CELL_WIDTH * 3: #мышь находится на поле с money
+        if y > CELL_HEIGHT * (COLUMN_COUNT - 2):  # мышь находится сверху
+            if x < CELL_WIDTH * 3:  # мышь находится на поле с money
                 pass
             elif CELL_WIDTH * 3 < x < CELL_WIDTH * 5 + CELL_WIDTH / 2:
                 print('simple gun')
@@ -393,7 +393,7 @@ class MyGame(arcade.Window):
                 self.activ_hand = Annihilator()
 
 
-def on_mouse_motion(self, x: float, y: float, dx: float, dy: float): #передвижение оружия по полю
+def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):  # передвижение оружия по полю
     if self.activ_hand != None:
         self.activ_hand.center_y = y
         self.activ_hand.center_x = x
@@ -401,16 +401,18 @@ def on_mouse_motion(self, x: float, y: float, dx: float, dy: float): #перед
 
 def on_mouse_release(self, x: float, y: float, button: int,
                      modifiers: int):
-    if self.activ_hand != None and y < CELL_HEIGHT * (COLUMN_COUNT - 2) and self.activ_hand.cost <= self.money: #мышь должна быть на поле, а денег должно хватать
-        self.activ_hand.center_x = justify_x(x) #выравнивание
+    if self.activ_hand != None and y < CELL_HEIGHT * (
+            COLUMN_COUNT - 2) and self.activ_hand.cost <= self.money:  # мышь должна быть на поле, а денег должно хватать
+        self.activ_hand.center_x = justify_x(x)  # выравнивание
         self.activ_hand.center_y = justify_y(y)
         if (self.activ_hand.center_x, self.activ_hand.center_y) not in self.sand_coords and \
-                (self.activ_hand.center_x, self.activ_hand.center_y) not in self.tower_coords: # пушка не на дороге и не на другой пушке
+                (self.activ_hand.center_x,
+                 self.activ_hand.center_y) not in self.tower_coords:  # пушка не на дороге и не на другой пушке
             self.guns.append(self.activ_hand)
             self.money -= self.activ_hand.cost
             self.tower_coords.append((self.activ_hand.center_x, self.activ_hand.center_y))
             self.activ_hand = None
-    elif self.activ_hand != None and y > CELL_HEIGHT * (COLUMN_COUNT - 2): #возврат пушки в меню
+    elif self.activ_hand != None and y > CELL_HEIGHT * (COLUMN_COUNT - 2):  # возврат пушки в меню
         self.activ_hand = None
 
 

@@ -271,7 +271,7 @@ class Annihilator(Gun):
         for i in range(1, 5):
             self.textures.append(arcade.load_texture(f'guns/annihilator{i}.png'))
         self.texture = self.textures[0]
-        self.cost = 3000
+        self.cost = 2000
 
 
 class MyGame(arcade.Window):
@@ -279,7 +279,7 @@ class MyGame(arcade.Window):
         super().__init__(width, height, title)
         # текстуры
         self.bg = arcade.load_texture('blocks/grass.png')
-        self.menu = arcade.load_texture('menu/tower_menu.png')
+        self.menu = arcade.load_texture('menu/menu.png')
         self.win = arcade.load_texture('endgame/win.png')
         self.lost = arcade.load_texture('endgame/lost.png')
 
@@ -401,8 +401,7 @@ class MyGame(arcade.Window):
 
     def on_mouse_release(self, x: float, y: float, button: int,
                          modifiers: int):
-        if self.activ_hand != None and y < CELL_HEIGHT * (
-                COLUMN_COUNT - 2) and self.activ_hand.cost <= self.money:  # мышь должна быть на поле, а денег должно хватать
+        if self.activ_hand != None and y < CELL_HEIGHT * (COLUMN_COUNT - 2) and self.activ_hand.cost <= self.money:  # мышь должна быть на поле, а денег должно хватать
             self.activ_hand.center_x = justify_x(x)  # выравнивание
             self.activ_hand.center_y = justify_y(y)
             if (self.activ_hand.center_x, self.activ_hand.center_y) not in self.sand_coords and \

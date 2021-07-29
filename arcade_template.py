@@ -370,7 +370,7 @@ class MyGame(arcade.Window):
                 self.monsters.append(demon)
                 self.monster_spawn = time.time()
                 self.monster_counter += 1
-                print(f'counter = {self.monster_counter}')
+                #print(f'counter = {self.monster_counter}')
 
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
 
@@ -393,27 +393,27 @@ class MyGame(arcade.Window):
                 self.activ_hand = Annihilator()
 
 
-def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):  # передвижение оружия по полю
-    if self.activ_hand != None:
-        self.activ_hand.center_y = y
-        self.activ_hand.center_x = x
+    def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):  # передвижение оружия по полю
+        if self.activ_hand is not None:
+            self.activ_hand.center_y = y
+            self.activ_hand.center_x = x
 
 
-def on_mouse_release(self, x: float, y: float, button: int,
-                     modifiers: int):
-    if self.activ_hand != None and y < CELL_HEIGHT * (
-            COLUMN_COUNT - 2) and self.activ_hand.cost <= self.money:  # мышь должна быть на поле, а денег должно хватать
-        self.activ_hand.center_x = justify_x(x)  # выравнивание
-        self.activ_hand.center_y = justify_y(y)
-        if (self.activ_hand.center_x, self.activ_hand.center_y) not in self.sand_coords and \
-                (self.activ_hand.center_x,
-                 self.activ_hand.center_y) not in self.tower_coords:  # пушка не на дороге и не на другой пушке
-            self.guns.append(self.activ_hand)
-            self.money -= self.activ_hand.cost
-            self.tower_coords.append((self.activ_hand.center_x, self.activ_hand.center_y))
+    def on_mouse_release(self, x: float, y: float, button: int,
+                         modifiers: int):
+        if self.activ_hand != None and y < CELL_HEIGHT * (
+                COLUMN_COUNT - 2) and self.activ_hand.cost <= self.money:  # мышь должна быть на поле, а денег должно хватать
+            self.activ_hand.center_x = justify_x(x)  # выравнивание
+            self.activ_hand.center_y = justify_y(y)
+            if (self.activ_hand.center_x, self.activ_hand.center_y) not in self.sand_coords and \
+                    (self.activ_hand.center_x,
+                     self.activ_hand.center_y) not in self.tower_coords:  # пушка не на дороге и не на другой пушке
+                self.guns.append(self.activ_hand)
+                self.money -= self.activ_hand.cost
+                self.tower_coords.append((self.activ_hand.center_x, self.activ_hand.center_y))
+                self.activ_hand = None
+        elif self.activ_hand != None and y > CELL_HEIGHT * (COLUMN_COUNT - 2):  # возврат пушки в меню
             self.activ_hand = None
-    elif self.activ_hand != None and y > CELL_HEIGHT * (COLUMN_COUNT - 2):  # возврат пушки в меню
-        self.activ_hand = None
 
 
 window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)

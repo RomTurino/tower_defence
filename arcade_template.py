@@ -278,7 +278,7 @@ class MyGame(arcade.Window):
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
         # текстуры
-        self.bg = arcade.load_texture('Blocks/grass.png')
+        self.bg = arcade.load_texture('blocks/grass.png')
         self.menu = arcade.load_texture('menu/tower_menu.png')
         self.win = arcade.load_texture('endgame/win.png')
         self.lost = arcade.load_texture('endgame/lost.png')
